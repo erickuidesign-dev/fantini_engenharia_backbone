@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initMobileMenu();
   initHeroVideoCarousel();
+  initCustomCursor();
+  initBentoParallax3D();
 });
 
 
@@ -291,5 +293,115 @@ function initHeroVideoCarousel() {
 
   // Inicia o timer
   startCarouselTimer();
+}
+
+/* ==========================================================================
+   CURSOR CUSTOMIZADO COCKPIT HUD (SPRING CURSOR LERP)
+   ========================================================================== */
+function initCustomCursor() {
+  // Apenas ativa se suportar cursor (desktop)
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  const cursorHTML = `
+    <div class="custom-cursor">
+      <div class="cursor-dot"></div>
+      <div class="cursor-ring"></div>
+      <span class="cursor-label"></span>
+    </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', cursorHTML);
+
+  const cursor = document.querySelector('.custom-cursor');
+  const dot = cursor.querySelector('.cursor-dot');
+  const ring = cursor.querySelector('.cursor-ring');
+  const label = cursor.querySelector('.cursor-label');
+
+  let mouseX = -100, mouseY = -100;
+  let ringX = -100, ringY = -100;
+  let isMoving = false;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    if (!isMoving) {
+      isMoving = true;
+      cursor.style.display = 'block';
+    }
+  });
+
+  // Loop requestAnimationFrame da GPU para suavidade absoluta
+  function updateCursor() {
+    // Interpolação Linear (Lerp) para anel (atraso físico mola)
+    ringX += (mouseX - ringX) * 0.15;
+    ringY += (mouseY - ringY) * 0.15;
+
+    dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+    ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+
+    requestAnimationFrame(updateCursor);
+  }
+  requestAnimationFrame(updateCursor);
+
+  // Escuta interações com links e botões normais (Abraço Magnético)
+  const hoverSelectors = 'a, button, [role="button"], .sim-selector-btn, .brand-logo-wrap';
+  document.addEventListener('mouseenter', (e) => {
+    if (e.target.matches && e.target.matches(hoverSelectors)) {
+      cursor.classList.add('hovering-button');
+    }
+  }, true);
+
+  document.addEventListener('mouseleave', (e) => {
+    if (e.target.matches && e.target.matches(hoverSelectors)) {
+      cursor.classList.remove('hovering-button');
+    }
+  }, true);
+
+  // Escuta interações com elementos que possuem etiquetas de cursor customizadas
+  document.addEventListener('mouseenter', (e) => {
+    const targetWithLabel = e.target.closest && e.target.closest('[data-cursor-label]');
+    if (targetWithLabel) {
+      const text = targetWithLabel.getAttribute('data-cursor-label');
+      label.textContent = text;
+      cursor.classList.add('hovering-label');
+    }
+  }, true);
+
+  document.addEventListener('mouseleave', (e) => {
+    const targetWithLabel = e.target.closest && e.target.closest('[data-cursor-label]');
+    if (targetWithLabel) {
+      cursor.classList.remove('hovering-label');
+      label.textContent = '';
+    }
+  }, true);
+}
+
+/* ==========================================================================
+   EFEITO PARALLAX 3D TILT (BENTO CARDS)
+   ========================================================================== */
+function initBentoParallax3D() {
+  // Apenas ativa no desktop (evita problemas em telas de toque)
+  if (window.matchMedia('(hover: none)').matches) return;
+
+  const bentoCards = document.querySelectorAll('.bento-card');
+  bentoCards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      
+      // Coordenadas relativas de -0.5 a 0.5 baseadas nos eixos X e Y do card
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      // Ângulo de inclinação física (máximo de 9 graus)
+      const tiltY = x * 18;
+      const tiltX = -y * 18;
+
+      card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.01)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+    });
+  });
 }
 

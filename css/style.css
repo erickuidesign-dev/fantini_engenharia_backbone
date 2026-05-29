@@ -676,10 +676,13 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: var(--transition-bezier);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease;
   position: relative;
   overflow: hidden;
   background-color: transparent;
+  transform-style: preserve-3d;
+  perspective: 1000px;
 }
 
 .bento-card:hover {
@@ -719,6 +722,7 @@ html, body {
   align-items: flex-start;
   position: relative;
   z-index: 10;
+  transform: translateZ(35px);
 }
 
 .bento-number {
@@ -761,6 +765,7 @@ html, body {
 .bento-card-body {
   position: relative;
   z-index: 10;
+  transform: translateZ(35px);
 }
 
 .bento-card-body h3 {
@@ -1389,4 +1394,111 @@ textarea.form-control {
 
 .tech-grid-bg {
   animation: techLinePulse 8s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   CUSTOM HUD SPRING CURSOR & GLASS PERSPECTIVE DEPTH
+   ========================================================================== */
+@media (hover: hover) and (pointer: fine) {
+  html, body, a, button, [role="button"], select, input, textarea, .bento-card, .brand-logo-wrap {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 99999;
+  display: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .custom-cursor {
+    display: block;
+  }
+}
+
+.cursor-dot {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 4px;
+  height: 4px;
+  background-color: var(--color-text-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  z-index: 2;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cursor-ring {
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              top 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              left 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, width, height;
+  z-index: 1;
+}
+
+.cursor-label {
+  position: absolute;
+  top: -6px;
+  left: 20px;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  letter-spacing: 1px;
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Hover States do Cursor */
+/* Hovering link/button */
+.custom-cursor.hovering-button .cursor-ring {
+  width: 48px;
+  height: 48px;
+  top: -24px;
+  left: -24px;
+  border-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.custom-cursor.hovering-button .cursor-dot {
+  transform: scale(1.5);
+  background-color: var(--color-text-primary);
+}
+
+/* Hovering with custom labels (Bento/Projects) */
+.custom-cursor.hovering-label .cursor-ring {
+  width: 54px;
+  height: 54px;
+  top: -27px;
+  left: -27px;
+  border-color: var(--color-text-primary);
+}
+
+.custom-cursor.hovering-label .cursor-label {
+  opacity: 1;
+  transform: translateX(0);
 }
