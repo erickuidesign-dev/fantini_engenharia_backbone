@@ -1119,3 +1119,56 @@ textarea.form-control {
     gap: 3rem;
   }
 }
+
+/* ==========================================================================
+   MOTION DESIGN ENGINE - ELEVATED AWWWARDS ENTRANCE EFFECTS
+   ========================================================================== */
+/* Core scroll reveals classes */
+.reveal-slide-up, .reveal-scale, .reveal-opacity {
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+  filter: blur(4px);
+}
+
+.reveal-slide-up {
+  transform: translateY(40px);
+}
+
+.reveal-scale {
+  transform: scale(0.96) translateY(20px);
+}
+
+.reveal-opacity {
+  filter: blur(2px);
+}
+
+/* In-view states triggered by Intersection Observer */
+.reveal-slide-up.in-view, 
+.reveal-scale.in-view, 
+.reveal-opacity.in-view {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Stagger delays (sequential reveals) */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+.delay-6 { transition-delay: 0.6s; }
+
+/* Micro-interaction for technical lines animation (.linesanimation replacement) */
+@keyframes techLinePulse {
+  0% { opacity: 0.15; }
+  50% { opacity: 0.35; }
+  100% { opacity: 0.15; }
+}
+
+.tech-grid-bg {
+  animation: techLinePulse 8s ease-in-out infinite;
+}

@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initSimulator();
   initHeaderScroll();
+  initScrollAnimations();
 });
 
 /* ==========================================================================
@@ -123,4 +124,29 @@ function initHeaderScroll() {
       header.style.padding = '0';
     }
   });
+}
+
+/* ==========================================================================
+   REVEAL ON SCROLL ENGINE (INTERSECTION OBSERVER)
+   ========================================================================== */
+function initScrollAnimations() {
+  const revealElements = document.querySelectorAll('.reveal-slide-up, .reveal-scale, .reveal-opacity');
+  if (revealElements.length === 0) return;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.12 // Trigger when 12% of the element is visible
+  };
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target); // Trigger only once
+      }
+    });
+  }, observerOptions);
+
+  revealElements.forEach(el => observer.observe(el));
 }
