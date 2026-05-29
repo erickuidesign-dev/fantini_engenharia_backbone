@@ -246,6 +246,26 @@ html, body {
   transform: translateX(4px);
 }
 
+/* Destaque Monumental para o Botão Primário Sólido */
+.button-01:not(.button-01-secondary) .button-01-main {
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+
+.button-01:not(.button-01-secondary) .button-01-text-wrap .paragraph-02 {
+  color: #050505;
+}
+
+.button-01:not(.button-01-secondary) .button-01-main img {
+  filter: brightness(0); /* Força a seta em preto absoluto */
+}
+
+/* Hover do Botão Primário */
+.button-01:not(.button-01-secondary):hover .button-01-main {
+  background-color: #e5e5e5;
+  border-color: #e5e5e5;
+}
+
 .button-01-secondary .button-01-main {
   background-color: transparent;
   border: 1px solid var(--color-border-inactive);
