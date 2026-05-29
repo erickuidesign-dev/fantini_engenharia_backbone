@@ -12,3 +12,6 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 .DS_Store
+
+# Large videos over GitHub limit (100MB)
+assets/video/19983784-uhd_3840_2160_25fps.mp4

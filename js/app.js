@@ -2,7 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initSimulator();
   initHeaderScroll();
   initScrollAnimations();
+  initMobileMenu();
+  initHeroVideoCarousel();
 });
+
 
 /* ==========================================================================
    SIMULADOR DE ACESSO INTERATIVO - FANTINI
@@ -150,3 +153,105 @@ function initScrollAnimations() {
 
   revealElements.forEach(el => observer.observe(el));
 }
+
+/* ==========================================================================
+   MENU HAMBURGUER RESPONSIVO (MOBILE)
+   ========================================================================== */
+function initMobileMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navMenu = document.querySelector('.nav-menu');
+  const navLinks = document.querySelectorAll('.nav-link, .nav-menu .button-01');
+
+  if (!menuToggle || !navMenu) return;
+
+  function toggleMenu() {
+    const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+    
+    menuToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
+    menuToggle.setAttribute('aria-expanded', !isExpanded);
+    
+    // Trava/Destrava a rolagem do body de fundo
+    if (!isExpanded) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }
+
+  function closeMenu() {
+    menuToggle.classList.remove('active');
+    navMenu.classList.remove('active');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  menuToggle.addEventListener('click', toggleMenu);
+
+  // Fecha o menu ao clicar em qualquer link (auto-close)
+  navLinks.forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Limpa travas se redimensionar a tela para desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      closeMenu();
+    }
+  });
+}
+
+/* ==========================================================================
+   CARROSSEL DE VÍDEOS DE FUNDO LAZY LOADED (HERO)
+   ========================================================================== */
+function initHeroVideoCarousel() {
+  const carousel = document.querySelector('.hero-video-carousel');
+  if (!carousel) return;
+
+  const slides = carousel.querySelectorAll('.hero-video-slide');
+  if (slides.length <= 1) return;
+
+  let currentSlideIndex = 0;
+  const slideInterval = 6000; // Rotaciona a cada 6 segundos
+
+  // Prepara o lazy loading do próximo slide
+  function preloadSlideVideo(slide) {
+    const video = slide.querySelector('video');
+    if (!video) return;
+    
+    // Se ainda não tem src e tem data-src, injeta e carrega
+    if (!video.src && video.getAttribute('data-src')) {
+      const dataSrc = video.getAttribute('data-src');
+      const source = video.querySelector('source');
+      
+      if (source) {
+        source.src = dataSrc;
+      } else {
+        video.src = dataSrc;
+      }
+      
+      video.load();
+      video.play().catch(err => console.log("Erro de autoplay evitado:", err));
+    } else if (video.paused) {
+      video.play().catch(err => console.log("Erro ao dar play:", err));
+    }
+  }
+
+  // Avança para o próximo slide
+  function nextSlide() {
+    const prevSlide = slides[currentSlideIndex];
+    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
+    const nextSlideEl = slides[currentSlideIndex];
+
+    // Carrega o vídeo do próximo slide antes de mostrá-lo
+    preloadSlideVideo(nextSlideEl);
+
+    // Faz a transição de opacidade via classe active (crossfade)
+    prevSlide.classList.remove('active');
+    nextSlideEl.classList.add('active');
+  }
+
+  // Inicia o loop automático do carrossel
+  setInterval(nextSlide, slideInterval);
+}
+

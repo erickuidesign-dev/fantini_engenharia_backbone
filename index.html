@@ -31,8 +31,15 @@
         </svg>
       </a>
       
+      <!-- Botão de Alternância Hamburguer -->
+      <button class="menu-toggle" aria-label="Abrir Menu" aria-controls="mobile-menu" aria-expanded="false">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      
       <nav aria-label="Navegação Principal">
-        <ul class="nav-menu">
+        <ul class="nav-menu" id="mobile-menu">
           <li><a href="solucoes.html" class="nav-link">Soluções</a></li>
           <li><a href="sobre.html" class="nav-link">Sobre</a></li>
           <li><a href="projetos.html" class="nav-link">Projetos</a></li>
@@ -60,6 +67,37 @@
        HERO SECTION (O IMPACTO DE AUTORIDADE)
        ========================================================================== */ -->
   <section class="hero" id="home">
+    <!-- Carrossel de Vídeos de Fundo (Lazy Loaded) -->
+    <div class="hero-video-carousel">
+      <!-- Slide 1 (Carregado de imediato) -->
+      <div class="hero-video-slide active" data-index="0">
+        <video autoplay muted loop playsinline preload="auto">
+          <source src="assets/video/6529446-hd_1920_1080_30fps.mp4" type="video/mp4">
+        </video>
+      </div>
+      <!-- Slide 2 (Lazy Load) -->
+      <div class="hero-video-slide" data-index="1">
+        <video muted loop playsinline preload="none" data-src="assets/video/19217897-uhd_3840_2160_30fps.mp4">
+          <source type="video/mp4">
+        </video>
+      </div>
+      <!-- Slide 3 (Lazy Load) -->
+      <div class="hero-video-slide" data-index="2">
+        <video muted loop playsinline preload="none" data-src="assets/video/5354968-uhd_3840_2160_24fps.mp4">
+          <source type="video/mp4">
+        </video>
+      </div>
+      <!-- Slide 4 (Lazy Load) -->
+      <div class="hero-video-slide" data-index="3">
+        <video muted loop playsinline preload="none" data-src="assets/video/7651607-uhd_3840_2160_30fps.mp4">
+          <source type="video/mp4">
+        </video>
+      </div>
+      
+      <!-- Filtro de contraste da tipografia (Dimming Overlay) -->
+      <div class="hero-video-overlay"></div>
+    </div>
+    
     <div class="tech-grid-bg"></div>
     <div class="hero-overlay"></div>
     
