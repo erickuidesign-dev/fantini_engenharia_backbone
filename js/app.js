@@ -209,12 +209,14 @@ function initHeroVideoCarousel() {
   if (!carousel) return;
 
   const slides = carousel.querySelectorAll('.hero-video-slide');
+  const indicators = document.querySelectorAll('.indicator-btn');
   if (slides.length <= 1) return;
 
   let currentSlideIndex = 0;
   const slideInterval = 6000; // Rotaciona a cada 6 segundos
+  let carouselTimer = null;
 
-  // Prepara o lazy loading do próximo slide
+  // Prepara o lazy loading de um slide específico
   function preloadSlideVideo(slide) {
     const video = slide.querySelector('video');
     if (!video) return;
@@ -237,21 +239,57 @@ function initHeroVideoCarousel() {
     }
   }
 
-  // Avança para o próximo slide
-  function nextSlide() {
-    const prevSlide = slides[currentSlideIndex];
-    currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-    const nextSlideEl = slides[currentSlideIndex];
+  // Faz a transição estrutural para um slide específico
+  function goToSlide(targetIndex) {
+    if (targetIndex === currentSlideIndex) return;
 
-    // Carrega o vídeo do próximo slide antes de mostrá-lo
+    const prevSlide = slides[currentSlideIndex];
+    const prevIndicator = indicators[currentSlideIndex];
+    
+    currentSlideIndex = targetIndex;
+    
+    const nextSlideEl = slides[currentSlideIndex];
+    const nextIndicator = indicators[currentSlideIndex];
+
+    // Carrega/Dá play no vídeo do slide selecionado
     preloadSlideVideo(nextSlideEl);
 
-    // Faz a transição de opacidade via classe active (crossfade)
-    prevSlide.classList.remove('active');
+    // Fade de opacidade nos slides
+    if (prevSlide) prevSlide.classList.remove('active');
     nextSlideEl.classList.add('active');
+
+    // Sincroniza estados dos indicadores
+    if (prevIndicator) prevIndicator.classList.remove('active');
+    if (nextIndicator) nextIndicator.classList.add('active');
   }
 
-  // Inicia o loop automático do carrossel
-  setInterval(nextSlide, slideInterval);
+  // Avança automaticamente para o próximo slide
+  function nextSlide() {
+    const nextIndex = (currentSlideIndex + 1) % slides.length;
+    goToSlide(nextIndex);
+  }
+
+  // Inicializa o temporizador automático do carrossel
+  function startCarouselTimer() {
+    carouselTimer = setInterval(nextSlide, slideInterval);
+  }
+
+  // Reinicia o timer após interação manual
+  function resetCarouselTimer() {
+    clearInterval(carouselTimer);
+    startCarouselTimer();
+  }
+
+  // Configura cliques nos botões indicadores
+  indicators.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetIndex = parseInt(btn.getAttribute('data-slide'), 10);
+      goToSlide(targetIndex);
+      resetCarouselTimer();
+    });
+  });
+
+  // Inicia o timer
+  startCarouselTimer();
 }
 
