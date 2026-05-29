@@ -1,0 +1,1121 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* ==========================================================================
+   EXACT INFRANEX SAAS DESIGN SYSTEM (FANTINI CO. INTEGRATION)
+   ========================================================================== */
+:root {
+  /* Cores Originais Infranex */
+  --color-bg: #050505;                    /* Main Canvas Background */
+  --color-true-black: #0a0a0a;            /* Pure Slate Card Background */
+  --color-bright-black: #1d2326;          /* Medium Surfaces, Pills and Inputs */
+  --color-text-gray: #fff9;               /* Default readable body copy */
+  --color-text-primary: #ffffff;          /* High contrast headings */
+  --color-border-inactive: rgba(255, 255, 255, 0.08); /* 1px outline */
+  --color-border-hover: rgba(255, 255, 255, 0.2);    /* Border peek highlight */
+  
+  /* Border Radii Tokens (Infranex standard) */
+  --border-radius-tiny: 4px;
+  --border-radius-medium: 6px;
+  --border-radius-normal: 8px;
+  --border-radius-large: 10px;
+  --border-radius-jumbo: 18px;
+  --border-radius-massive: 100px;
+  
+  /* Fontes */
+  --font-main: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Precision Easing */
+  --transition-bezier: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+  background-color: var(--color-bg) !important;
+  color: var(--color-text-gray);
+  font-family: var(--font-main);
+  font-size: 14px;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Utilities */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-padding {
+  padding: 8rem 0;
+  border-bottom: 1px solid var(--color-border-inactive);
+}
+
+.text-center { text-align: center; }
+
+/* Grid de Linhas Técnicas Infranex */
+.tech-grid-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   HEADER (NAVEGAÇÃO SUPREMA)
+   ========================================================================== */
+.header-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(5, 5, 5, 0.95);
+  border-bottom: 1px solid var(--color-border-inactive);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  transition: var(--transition-bezier);
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 76px;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  text-decoration: none;
+}
+
+.header-logo svg {
+  height: 100%;
+  width: auto;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: var(--transition-bezier);
+}
+
+.nav-link:hover {
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   INFRANEX MASTER BUTTONS SYSTEM (.button-01)
+   ========================================================================== */
+.button-01 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.button-01-main {
+  background-color: rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--border-radius-medium); /* 6px */
+  padding: 12px 26px;
+  backdrop-filter: blur(6px);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-bezier);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.button-01-text-wrap {
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+  height: 14px;
+  display: flex;
+  flex-direction: column;
+}
+
+.button-01-text-wrap .paragraph-02 {
+  font-family: var(--font-main);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-primary);
+  margin: 0;
+  height: 14px;
+  line-height: 14px;
+  white-space: nowrap;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.button-01-main img {
+  width: 14px;
+  height: 14px;
+  filter: invert(1);
+  position: relative;
+  z-index: 5;
+  transition: var(--transition-bezier);
+}
+
+/* Overlays e efeitos interativos */
+.button-01:hover .button-01-main {
+  border-color: var(--color-text-primary);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.button-01:hover .button-01-text-wrap .paragraph-02 {
+  transform: translateY(-100%);
+}
+
+.button-01:hover .button-01-main img {
+  transform: translateX(4px);
+}
+
+.button-01-secondary .button-01-main {
+  background-color: transparent;
+  border: 1px solid var(--color-border-inactive);
+}
+
+.button-01-secondary:hover .button-01-main {
+  border-color: var(--color-border-hover);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.button-01-sm .button-01-main {
+  padding: 8px 18px;
+  border-radius: var(--border-radius-tiny); /* 4px */
+}
+
+.button-01-sm .button-01-text-wrap {
+  height: 12px;
+}
+
+.button-01-sm .button-01-text-wrap .paragraph-02 {
+  font-size: 10px;
+  height: 12px;
+  line-height: 12px;
+}
+
+/* ==========================================================================
+   THE SIGNATURE GLASSMORPHIC & VECTOR LAYERING (z-index overlays)
+   ========================================================================== */
+/* Layer 1: Infranex Face Gradient Background */
+.bg-color {
+  position: absolute;
+  inset: 0%;
+  z-index: 1;
+  height: 100%;
+  border-radius: inherit;
+  background-color: rgba(0, 0, 0, 0.12);
+  background-image: 
+    linear-gradient(#131313, #030303 72%, #01010100), 
+    linear-gradient(#202020b3, #000);
+}
+
+/* Layer 2: Infranex 1px Inner Outline Glow */
+.bg-stroke {
+  position: absolute;
+  inset: 0%;
+  z-index: 2;
+  opacity: .16;
+  background-image: linear-gradient(#fff, #99999980);
+  border-radius: inherit;
+  pointer-events: none;
+  transition: var(--transition-bezier);
+}
+
+/* Layer 3: Diamond Glass Reflection Overlay */
+.bg-daimond-16 {
+  position: absolute;
+  inset: 0%;
+  z-index: 3;
+  opacity: .16;
+  background-image: 
+    url("../assets/6957c00accf867b0e120de47_Gradi_11859cbbbee3.svg"), 
+    linear-gradient(350deg, #fff, #ffffff52);
+  background-position: 50%, 0 0;
+  background-repeat: no-repeat, repeat;
+  background-size: cover, auto;
+  border-radius: inherit;
+  pointer-events: none;
+  transition: var(--transition-bezier);
+}
+
+/* Interaction feedback for visual layering */
+.bento-card:hover .bg-stroke,
+.sim-result-box:hover .bg-stroke,
+.process-card:hover .bg-stroke,
+.contact-form:hover .bg-stroke {
+  opacity: .32;
+}
+
+.bento-card:hover .bg-daimond-16,
+.sim-result-box:hover .bg-daimond-16,
+.process-card:hover .bg-daimond-16,
+.contact-form:hover .bg-daimond-16,
+.button-01:hover .bg-daimond-16 {
+  opacity: .28;
+}
+
+/* ==========================================================================
+   CATEGORY STATUS PILL TAGS (.section-teg-wrap)
+   ========================================================================== */
+.section-teg-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--color-bright-black);
+  border: 1px solid var(--color-border-inactive);
+  padding: 6px 14px 6px 6px;
+  border-radius: var(--border-radius-massive); /* 100px */
+  text-decoration: none;
+  transition: var(--transition-bezier);
+  margin-bottom: 2rem;
+  height: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.section-teg-wrap:hover {
+  border-color: var(--color-border-hover);
+}
+
+.section-teg-icon {
+  width: 22px;
+  height: 22px;
+  background-color: var(--color-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 5;
+}
+
+.section-teg-icon img {
+  width: 12px;
+  height: 12px;
+  filter: invert(1);
+}
+
+.section-teg-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  position: relative;
+  z-index: 5;
+}
+
+.section-teg-wrap .bg-daimond-16 {
+  z-index: 1;
+}
+
+/* ==========================================================================
+   HERO SECTION (O IMPACTO DE AUTORIDADE)
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 76px;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid var(--color-border-inactive);
+}
+
+.hero-content {
+  position: relative;
+  max-width: 800px;
+  z-index: 10;
+  padding: 8rem 0;
+}
+
+.hero-title h1 {
+  font-family: var(--font-main);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 500; /* Inter Display Medium (500) */
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin-bottom: 2rem;
+}
+
+.hero-subtitle p {
+  font-family: var(--font-main);
+  font-size: 15px; /* Paragraph Large */
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--color-text-gray);
+  margin-bottom: 3.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   ZONAS DE PROVA SOCIAL COM MARQUEE CONTÍNUO INFINITO
+   ========================================================================== */
+.proof-bar {
+  border-bottom: 1px solid var(--color-border-inactive);
+  background-color: var(--color-bg);
+  padding: 3rem 0;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.proof-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.proof-title {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* Infinite Scrolling Marquee */
+.brand-bottom-list {
+  display: flex;
+  gap: 80px;
+  width: max-content;
+  animation: marquee-scroll 25s linear infinite;
+  padding-left: 20px;
+}
+
+.marquee-wrapper {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-wrapper::before, .marquee-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-wrapper::before {
+  left: 0;
+  background: linear-gradient(to right, var(--color-bg), transparent);
+}
+
+.marquee-wrapper::after {
+  right: 0;
+  background: linear-gradient(to left, var(--color-bg), transparent);
+}
+
+.brand-logo-wrap {
+  font-family: var(--font-main);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--color-text-muted);
+  opacity: 0.55;
+  transition: var(--transition-bezier);
+  cursor: default;
+}
+
+.brand-logo-wrap:hover {
+  opacity: 1;
+  color: var(--color-text-primary);
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ==========================================================================
+   BENTO GRID DE SOLUÇÕES (HIGH-PERFORMANCE INFRANEX CARDS)
+   ========================================================================== */
+.section-header {
+  margin-bottom: 5rem;
+}
+
+.section-title {
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
+  font-weight: 600; /* Inter Display Semi-Bold (600) */
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 280px);
+  gap: 20px;
+}
+
+/* Opaque High Performance Infranex Card */
+.bento-card {
+  border: 1px solid var(--color-border-inactive);
+  border-radius: var(--border-radius-large); /* 10px */
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: var(--transition-bezier);
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.bento-card:hover {
+  border-color: var(--color-border-hover);
+}
+
+.bento-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 10;
+}
+
+.bento-number {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+}
+
+.bento-icon-box {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-border-inactive);
+  border-radius: var(--border-radius-medium); /* 6px */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-bezier);
+  background-color: rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 15;
+}
+
+.bento-card:hover .bento-icon-box {
+  border-color: var(--color-border-hover);
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.bento-icon-box svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--color-text-secondary);
+  transition: var(--transition-bezier);
+}
+
+.bento-card:hover .bento-icon-box svg {
+  fill: var(--color-text-primary);
+}
+
+.bento-card-body {
+  position: relative;
+  z-index: 10;
+}
+
+.bento-card-body h3 {
+  font-size: 1.35rem;
+  font-weight: 500; /* Interdisplay Medium (500) */
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin-bottom: 0.8rem;
+}
+
+.bento-card-body p {
+  font-size: 14px; /* Paragraph Normal Infranex */
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* Modificadores de Proporção Bento Grid */
+.bento-vertical {
+  grid-column: span 2;
+  grid-row: span 2;
+  height: 100%;
+}
+
+.bento-horizontal {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.bento-regular {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.bento-vertical .bento-card-body h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+}
+
+.bento-vertical .bento-card-body p {
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   SIMULADOR DE SOLUÇÕES INTERATIVO
+   ========================================================================== */
+.simulator {
+  background-color: var(--color-bg);
+}
+
+.simulator-layout {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.sim-control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.sim-selector-btn {
+  background-color: var(--color-surface-card);
+  border: 1px solid var(--color-border-inactive);
+  border-radius: var(--border-radius-large); /* 10px */
+  padding: 1.8rem 2rem;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-bezier);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  outline: none;
+}
+
+.sim-selector-btn h4 {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-secondary);
+  transition: var(--transition-bezier);
+}
+
+.sim-selector-btn svg {
+  color: var(--color-text-muted);
+  transition: var(--transition-bezier);
+}
+
+.sim-selector-btn:hover {
+  background-color: #0e0e0e;
+  border-color: var(--color-border-hover);
+}
+
+.sim-selector-btn.active {
+  background-color: #0e0e0e;
+  border-color: var(--color-border-active);
+}
+
+.sim-selector-btn.active h4 {
+  color: var(--color-text-primary);
+}
+
+.sim-selector-btn.active svg {
+  color: var(--color-text-primary);
+}
+
+/* Lado do Resultado */
+.sim-result-box {
+  border: 1px solid var(--color-border-inactive);
+  border-radius: var(--border-radius-large); /* 10px */
+  padding: 3.5rem;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.sim-result-header {
+  margin-bottom: 2.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.sim-result-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.sim-result-title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+  margin-bottom: 1rem;
+}
+
+.sim-result-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* Lista de Especificações Recomendadas */
+.sim-specs-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+  border-top: 1px solid var(--color-border-inactive);
+  padding-top: 2rem;
+  position: relative;
+  z-index: 10;
+}
+
+.sim-spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sim-spec-label {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sim-spec-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   NOSSO PROCESSO DE ENGENHARIA
+   ========================================================================== */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.process-card {
+  border: 1px solid var(--color-border-inactive);
+  border-radius: var(--border-radius-large); /* 10px */
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  transition: var(--transition-bezier);
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.process-card:hover {
+  border-color: var(--color-border-hover);
+}
+
+.process-step {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+  position: relative;
+  z-index: 10;
+}
+
+.process-card h4 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  position: relative;
+  z-index: 10;
+}
+
+.process-card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  position: relative;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   FORMULÁRIO DE CONVERSÃO CORPORATIVA (LEAD DE ELITE)
+   ========================================================================== */
+.contact {
+  background-color: var(--color-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.contact-info-title {
+  font-size: clamp(2rem, 3.5vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+.contact-info-desc {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+  margin-bottom: 2rem;
+}
+
+.contact-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border-left: 2px solid var(--color-border-inactive);
+  padding-left: 1.5rem;
+}
+
+.contact-detail-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-muted);
+}
+
+.contact-detail-value {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* Formulário Infranex Opaque Card */
+.contact-form {
+  border: 1px solid var(--color-border-inactive);
+  border-radius: var(--border-radius-large); /* 10px */
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  position: relative;
+  z-index: 10;
+}
+
+.form-group label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-secondary);
+}
+
+.form-control {
+  background-color: rgba(5, 5, 5, 0.6);
+  border: 1px solid var(--color-border-inactive);
+  color: var(--color-text-primary);
+  font-family: var(--font-main);
+  font-size: 14px;
+  padding: 1rem 1.2rem;
+  width: 100%;
+  border-radius: var(--border-radius-medium); /* 6px */
+  outline: none;
+  transition: var(--transition-bezier);
+  position: relative;
+  z-index: 15;
+}
+
+.form-control:focus {
+  border-color: var(--color-border-hover);
+}
+
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-control-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   FOOTER (RODAPÉ CORPORATIVO)
+   ========================================================================== */
+.footer {
+  padding: 5rem 0 3rem 0;
+  background-color: var(--color-bg);
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-wrap: wrap;
+  gap: 4rem;
+  margin-bottom: 4rem;
+}
+
+.footer-brand {
+  max-width: 320px;
+}
+
+.footer-logo {
+  height: 34px;
+  margin-bottom: 1.5rem;
+}
+
+.footer-logo svg {
+  height: 100%;
+  width: auto;
+}
+
+.footer-brand p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.footer-links-group {
+  display: flex;
+  gap: 5rem;
+  flex-wrap: wrap;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.footer-column h5 {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-primary);
+}
+
+.footer-column ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer-column a {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: var(--transition-bezier);
+}
+
+.footer-column a:hover {
+  color: var(--color-text-primary);
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--color-border-inactive);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.footer-bottom-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.footer-bottom-links a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: var(--transition-bezier);
+}
+
+.footer-bottom-links a:hover {
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   MEDIA QUERIES - RESPONSIVIDADE ESTRUTURAL
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+  
+  .bento-vertical {
+    grid-column: span 2;
+  }
+  
+  .bento-regular {
+    grid-column: span 1;
+    height: 280px;
+  }
+  
+  .simulator-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 5rem 0;
+  }
+  
+  .nav-menu {
+    display: none;
+  }
+  
+  .hero {
+    min-height: auto;
+    padding: 100px 0 6rem 0;
+  }
+  
+  .hero-content {
+    padding: 4rem 0;
+  }
+  
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .bento-vertical, .bento-horizontal, .bento-regular {
+    grid-column: span 1;
+    height: auto;
+  }
+  
+  .bento-regular {
+    height: 280px;
+  }
+  
+  .sim-result-box {
+    padding: 2.5rem 1.8rem;
+  }
+  
+  .sim-specs-list {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  
+  .process-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .contact-form {
+    padding: 2.5rem 1.8rem;
+  }
+  
+  .form-control-row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .footer-links-group {
+    gap: 3rem;
+  }
+}
